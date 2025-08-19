@@ -11,6 +11,9 @@ export default function Dashboard() {
     function goToTransactions() {
         navigate("/transactions")
     }
+    function goToStats() {
+        navigate("/stats")
+    }
 
     return(
         <div className="dashboard">
@@ -22,7 +25,7 @@ export default function Dashboard() {
 
             />
             <StatsCard 
-
+                onClick = {goToStats}
             />
             <TransactionsCard
                 onClick = {goToTransactions}
