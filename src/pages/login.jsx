@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
+
 export default function Login() {
 const [userEmail, setUserEmail] = useState('j38555521@gmail.com')
 const [userPassword, setUserPassword] = useState('12345678')
@@ -24,8 +25,7 @@ const [userPassword, setUserPassword] = useState('12345678')
             alert('failed')
         }
     }
-
-        
+  
         
     return (
         <div className="login-page">
@@ -45,6 +45,7 @@ const [userPassword, setUserPassword] = useState('12345678')
                         onChange={(e) => setUserPassword(e.target.value)}
                         required />
                     <button onClick={(e)=>{handleSubmit(e, 'login')}}>Login</button>
+                    <span>Or</span>
                     <button onClick={(e)=>{handleSubmit(e, 'signup')}}>Signup</button>
                 </form>
             </div>

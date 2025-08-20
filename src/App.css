@@ -1,10 +1,23 @@
 :root {
-  --primary: #2E7D32;   /* green - money/success */
-  --secondary: #1565C0; /* blue - trust/stability */
-  --accent: #FBC02D;    /* yellow - highlight */
-  --bg: #F5F7FA;        /* light background */
-  --surface: #FFFFFF;   /* card background */
-  --text: #212121;      /* dark text */
+  --bg1: #F8FAFC;
+  --bg2: #E2E8F0;
+  --bg3: #CBD5E1;
+  --dark-bg1: #0F172A;
+  --dark-bg2: #1E293B;
+
+  --text1: #1E293B;
+  --text2: #334155;
+  --text3: #64748B ;
+  --text4: #94A3B8;
+  --text-accent1:#2563EB;
+  --text-accent2: #DC2626;
+  --text-accent3: #16A34A;
+  --text-accent4: #CA8A04;
+
+  --btn-color1: #2563EB;
+  --btn-color2: #64748B;
+  --btn-color3: #DC2626;
+  --btn-color3: #16A34A;
 
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Roboto', sans-serif;
@@ -12,11 +25,15 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background: var(--bg3);
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: var(--text);
+  color: var(--text1);
+}
+*, body, .root {
+  margin: 0;
+  padding: 0;
 }

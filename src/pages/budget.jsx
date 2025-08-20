@@ -13,6 +13,7 @@ export default function Budget() {
     const [itemPressed, setItemPressed] = useState(null)
 
     const budgetInputRef = useRef(null)
+    const nameInputRef = useRef(null)
     
     useEffect(()=>{
         budgetInputRef.current.focus()
@@ -21,11 +22,12 @@ export default function Budget() {
     function addExpense(e) {
         e.preventDefault();
         if (budgetAmount != '') {
-        setExpenses(prev => 
-            [...prev, {id: nanoid(), name: expenseName, amount:expenseAmount}]);
-        setSpent(prev => (prev + Number(expenseAmount)))
-        setExpenseName('');
-        setExpenseAmount('')
+            setExpenses(prev => 
+                [...prev, {id: nanoid(), name: expenseName, amount:expenseAmount}]);
+            setSpent(prev => (prev + Number(expenseAmount)))
+            setExpenseName('');
+            setExpenseAmount('')
+            nameInputRef.current.focus()
         }
         else{
             budgetInputRef.current.focus()
@@ -51,11 +53,16 @@ export default function Budget() {
             prev < 100 ?
             (spent / budgetAmount)*100 : 0
         )
-    )   
+    ) 
         
     },[spent])
 
-
+    function saveBudget() {
+        setBudgetAmount('')
+        setExpenses('')
+        setSpent(0)
+        budgetInputRef.current.focus()
+    }
 
     return (
         <div className="budget">
@@ -104,6 +111,7 @@ export default function Budget() {
             <div className="add-expense">
                 <form onSubmit={addExpense}>
                     <input 
+                        ref={nameInputRef}
                         required
                         type="text" 
                         placeholder="Expense name" 
@@ -147,7 +155,7 @@ export default function Budget() {
                         </li>))}
                     
                 </ul>
-                {remaining === 0 && <button>Save Budget</button>}
+                {remaining === 0 && <button onClick={saveBudget}>Save Budget</button>}
             </div>
             
             }

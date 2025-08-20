@@ -1,3 +1,11 @@
 .dashboard {
-    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.dash-header {
+    color: var(--text3);
+}
+.dashboard p {
+    color: var(--text-accent4);
 }
