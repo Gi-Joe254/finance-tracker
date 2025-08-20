@@ -10,7 +10,7 @@
   background: var(--bg1);
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 4px 5px 10px var(--text-accent4);
+  box-shadow: 2px 8px 10px var(--text-accent4);
   text-align: center;
   width: 100%;
   max-width: 380px;
@@ -22,7 +22,7 @@
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   color: var(--text3);
-  text-shadow: 4px 5px 10px var(--text-accent4);
+  text-shadow: 2px 8px 10px var(--text-accent4);
 }
 
 /* Inputs */
@@ -46,28 +46,30 @@
 
 /* Button */
 .login-card button {
-  width: 30%;
-  padding: 0.5rem;
-  margin: 1.2rem;
+  width: 80%;
+  padding: 0.9rem;
+  margin-top: 1.5rem;
   background: var(--text3);
-  color: var(--bg3);
+  color: var(--dark-bg1);
   border: none;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  border-radius: 10px;
+  font-size: 1rem;
   font-family: var(--font-heading);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.8s;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .login-card button:hover {
   color: var(--bg1);
   background: var(--text-accent4);
-  box-shadow: 0px 4px 10px var(--text-accent4);
+  box-shadow: 2px 8px 10px var(--text-accent4);
   
 }
 
-
 .login-card span {
-  font-size: 0.8rem;
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  color: var(--text2);
 }

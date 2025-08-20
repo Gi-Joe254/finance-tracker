@@ -21,6 +21,7 @@
 
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Roboto', sans-serif;
+
 }
 
 body {
@@ -30,10 +31,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   color: var(--text1);
 }
 *, body, .root {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
