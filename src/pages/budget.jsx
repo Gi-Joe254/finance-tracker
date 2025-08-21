@@ -66,7 +66,7 @@ export default function Budget() {
 
     return (
         <div className="budget">
-            <h1 className="dash-header">Budget</h1>
+            <h1 className="budget-header">Budget</h1>
 
             {/* Budget Setup */}
             <div className="budget-setup">
@@ -134,10 +134,7 @@ export default function Budget() {
                 <h3>Expenses</h3>
                 <ul>
                     {expenses.map((item)=>
-                        (<li 
-                            style={{
-                                height:'100px'
-                            }}
+                        (<li
                             key={item.id}
                             onClick={()=>{
                                 
