@@ -1,12 +1,25 @@
+/* DASHBOARD LAYOUT */
 .dashboard {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  max-width: 1200px;
+
 }
+
+.dashboard p { 
+  color: var(--text4); }
+
 .dash-header {
-    color: var(--text3);
-    text-shadow: 0px 5px 10px var(--text-accent4);
+  grid-column: 1 / -1;
+  color: var(--text3);
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  margin: 0.25rem 0 0.5rem;
 }
+
 .dashboard p {
-    color: var(--text-accent4);
+  color: var(--text4);
 }
+

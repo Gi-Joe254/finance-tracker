@@ -1,4 +1,4 @@
-import MainCard from "./mainCard";
+import MainCard from "./MainCard";
 
 export default function StatsCard({stats, onClick}) {
     return(
