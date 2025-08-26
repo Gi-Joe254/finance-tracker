@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import "./stats.css"
 import { collection, addDoc, deleteDoc, getDocs, doc, onSnapshot } from "firebase/firestore"
 import { db } from "../firebase"
+import StatsChart from "../dash-components/statsChart"
 
 export default function Stats() {
     const [income, setIncome] = useState(100000)
     const [balance, setBalance] = useState(0)
     const [expenses, setExpenses] = useState(0)
+    const [list, setList] = useState([])
 
     useEffect(()=> {
         const unsub = onSnapshot(collection(db, 'transactions'), (snapshot) => {
@@ -14,6 +16,7 @@ export default function Stats() {
                 id: doc.id,
                 ...doc.data()
             }))
+            setList(transList)
             let totalExpense = 0
             transList.forEach(item => {
                 totalExpense += Number(item.amt)
@@ -36,7 +39,13 @@ export default function Stats() {
 
             <div className="categories">
                 <h2>By Category</h2>
-                {/* list or chart goes here */}
+
+                <StatsChart data={
+                    list.map(item => ({
+                        name: item.cat,
+                        value: item.amt
+                    }))
+                } />
             </div>
         </div>
 
