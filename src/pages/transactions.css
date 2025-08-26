@@ -97,3 +97,11 @@
 .add-transactions button:hover {
   background: #4338ca;
 }
+
+.new-trans-btn {
+    background: var(--text-accent3)
+}
+
+.new-trans-btn:hover {
+    background: #5ab65d;
+}

@@ -1,6 +1,8 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import "./transactions.css"
 import { nanoid } from "nanoid"
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
+import { db } from "../firebase"
 
 export default function Transactions() {
 
@@ -9,34 +11,68 @@ export default function Transactions() {
     const [transAmount, setTransAmount] = useState('')
     const [date, setDate] = useState('')
 
-    const [tranctionTile, setTransactionTile] = useState([])
+//to store data from firestore >..
+    const [transactionTile, setTransactionTile] = useState([])
 
     const categoryRef = useRef(null)
 
-    function saveTransaction(e) {
-        e.preventDefault();
-        if (  category !== '' && description !== '' && transAmount !== '' && date != '' ){
-            setCategory(category)
-            setTransactionTile(prev =>[
-                ...prev,{
-                id: nanoid(),
-                cat: category,
-                des: description,
-                amt: transAmount,
-                dat: date
-                }
-            ]);
-            setCategory('')
-            setDescription('')
-            setDate('')
-            setTransAmount('')
-        }
-      else{
-        categoryRef.current.focus()
-      }
-        
+    const [addTransShown, setAddTransShown] = useState(false)
+
+    function showAddTransactions(e) {
+        setAddTransShown(prev => !prev);
+        e.target.style.display = 'none' 
     }
-    
+
+    async function saveTransaction(e) {
+        e.preventDefault()
+        if (  category !== '' && description !== '' && transAmount !== '' && date != '' ){
+            try{
+                await addDoc(collection(db, 'transactions'),{
+                    cat: category,
+                    des: description,
+                    amt: transAmount,
+                    dat: Timestamp.fromDate(new Date(date))
+                })
+                console.log('saved')
+                setCategory('')
+                setDescription('')
+                setTransAmount('')
+                setDate('') 
+            } catch (err) {
+                console.log('error, not saved');
+                
+            }
+        }
+        else{
+        categoryRef.current.focus()
+        }
+    } 
+
+    async function handleDelete() {
+        try{
+            const documents = await getDocs(collection(db, 'transactions'))
+            const delPromise = documents.docs.map(item => (
+                deleteDoc(doc(db, 'transactions', item.id))
+                
+            ))
+            await Promise.all(delPromise)
+            console.log('deleted')
+        } catch (err) {
+            console.log('error. Not deleted')
+        }
+    }
+
+    useEffect(()=> {
+        const unsub = onSnapshot(collection(db, 'transactions'), (snapshot) => {
+            const transList = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }))
+            setTransactionTile(transList)
+        })
+        return () => unsub()
+    },[])
+
     return(
         <div className="transactions-page">
             <h1 className="transactions-header">Transactions</h1>
@@ -51,20 +87,44 @@ export default function Transactions() {
                         </tr>
                     </thead>
                     
-                    {tranctionTile.map((item) => (
-                    <tbody key={item.id}>
-                        <tr>
-                            <td>{item.cat}</td>
-                            <td>{item.des}</td>
-                            <td>{item.amt}</td>
-                            <td>{item.dat}</td>
-                        </tr>
-                    </tbody>                        
-                    ))}
+                    
+                    <tbody>
+                        {transactionTile.map((item) => (
+                            <tr key={item.id}>
+                                <td>{item.cat}</td>
+                                <td>{item.des}</td>
+                                <td>{item.amt}</td>
+                                <td>
+                                    {item.dat?.seconds 
+                                    ? new Date(item.dat.seconds * 1000).toLocaleDateString()
+                                    : ""}
+                                </td>
+                            </tr>
+                         ))}
+                    </tbody>                       
 
                 </table>
+                {!transactionTile && <p>No transactions here</p>}
+                
             </div>
-            <div className="add-transactions">
+            <button 
+                className="new-trans-btn"
+                onClick={showAddTransactions}
+                style={{
+                    display:'block',
+                }}
+                >
+                    New Transaction
+            </button>
+            <button 
+                onClick={handleDelete}
+                className="del-trans-btn"
+            >Delete All
+            </button>
+            <div 
+                className="add-transactions" 
+                style={{display:addTransShown ? 'block':'none'}}
+            >
                 <form onSubmit={saveTransaction}>
                     <select 
                         ref={categoryRef}
