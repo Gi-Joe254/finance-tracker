@@ -54,7 +54,7 @@ export default function Stats() {
         })
         return () => unsub()
     },[])
-    console.log('data:',dateData)
+   
     return(
         <div className="stats">
             <h1 className="stats-header">Stats</h1>

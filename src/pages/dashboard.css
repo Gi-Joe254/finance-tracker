@@ -1,25 +1,56 @@
-/* DASHBOARD LAYOUT */
+
 .dashboard {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+.user-settings-icon {
+  
+  width: 40px;
+  position: absolute;
+  top: 0;
+  left: 85%;
+  color: var(--text1);
+  margin-top: 20px;
+}
+.user-settings-icon svg {
+  cursor: pointer;
+  color: var(--text1);
+  width: 30px;
+  height: 30px;
+ 
+}
+.user-settings-dropdown {
+  background: var(--bg2);
+  width: 90px;
+  list-style: none;
+  padding: 5px;
+  font-size: 0.6rem;
+  display: none;
+}
+.user-settings-icon:hover ul {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.25rem;
-  max-width: 1200px;
-
+  gap: 10px;
 }
-
-.dashboard p { 
-  color: var(--text4); }
-
+.greetings { 
+  color: var(--text4); 
+}
 .dash-header {
-  grid-column: 1 / -1;
   color: var(--text3);
   font-family: var(--font-heading);
-  font-size: 1.8rem;
-  margin: 0.25rem 0 0.5rem;
+  font-size: 3rem;
+  padding-left: 30px ;
 }
-
-.dashboard p {
-  color: var(--text4);
+.clickable-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  margin-bottom: 20px;
+  width: 95%;
+  margin: 0 auto;
 }
-
+.clickable-cards > :nth-child(3) {
+  grid-column: 1/ span 2;
+}

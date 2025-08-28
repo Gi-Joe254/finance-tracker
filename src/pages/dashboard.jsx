@@ -7,6 +7,8 @@ import BudgetCard from "../dash-components/budgetCard";
 import StatsCard from "../dash-components/statsCard";
 import TransactionsCard from "../dash-components/transactionsCard";
 import { signOut } from "firebase/auth";
+import Nav from "../dash-components/nav";
+import { GrUserSettings } from "react-icons/gr";
 
 
 export default function Dashboard() {
@@ -25,24 +27,31 @@ export default function Dashboard() {
     return(
         <div className="dashboard">
             <h1 className="dash-header">Dashboard</h1>
-            <p>Hello {user.email}</p>
+            <div className="user-settings-icon">
+                <GrUserSettings />
+                <ul className="user-settings-dropdown">
+                    <li>Manage Account</li>
+                    <li>Set Theme</li>
+                    <li  onClick={()=>{signOut(auth)}}>Logout</li>
+                </ul>
+            </div>
+            <p className="greetings">Hello {user.email}</p>
             <BalanceCard 
+                title= 'Balance'
                 balance='200'
             />
-            <BudgetCard 
+            <div className="clickable-cards">
+                <BudgetCard 
                 onClick={goToBudget}
-            />
-            <StatsCard 
-                onClick = {goToStats}
-            />
-            <TransactionsCard
-                onClick = {goToTransactions}
-            />
-            <button
-                onClick={()=>{signOut(auth)}}
-            >
-                Logout
-            </button>
+                />
+                <StatsCard 
+                    onClick = {goToStats}
+                />
+                <TransactionsCard
+                    onClick = {goToTransactions}
+                />
+            </div>
+            <Nav />
         </div> 
     )
 }

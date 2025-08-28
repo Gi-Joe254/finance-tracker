@@ -1,13 +1,13 @@
-import { XAxis, YAxis, Tooltip, Cell, LineChart, Line } from "recharts";
+import { XAxis, YAxis, Tooltip, AreaChart, Area } from "recharts";
 
 export default function DateChart({ data }) {
-  const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"]
+ 
   return (
-    <LineChart width={400} height={300} data={data}>
-      <Line type='monotone' dataKey='amt' stroke="red" />
-      <XAxis dataKey='dat' />
+    <AreaChart width={400} height={300} data={data}>
+      <Area type='monotone' dataKey='amt' stroke="red" fill="blue"/>
+      <XAxis dataKey='dat' reversed />
       <YAxis />
       <Tooltip />
-    </LineChart>
+    </AreaChart>
   );
 }

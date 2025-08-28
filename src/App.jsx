@@ -11,44 +11,46 @@ import ProtectedRoute from './dash-components/protectedRoute'
 export default function App() {
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />    
-        <Route
-          path="/dashboard" 
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-       /> 
-        <Route 
-          path="/transactions" 
-          element={
-            <ProtectedRoute>
-              <Transactions />
-            </ProtectedRoute>
-          } 
-        />
-        <Route
-          path="/stats" 
-          element={
-            <ProtectedRoute>
-              <Stats />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/budget" 
-          element={
-            <ProtectedRoute>
-              <Budget />
-            </ProtectedRoute>
-          } 
-        />
-      </Routes>
-       
-    </Router>
+    <div className="router-container">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />    
+          <Route
+            path="/dashboard" 
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+        /> 
+          <Route 
+            path="/transactions" 
+            element={
+              <ProtectedRoute>
+                <Transactions />
+              </ProtectedRoute>
+            } 
+          />
+          <Route
+            path="/stats" 
+            element={
+              <ProtectedRoute>
+                <Stats />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/budget" 
+            element={
+              <ProtectedRoute>
+                <Budget />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+        
+      </Router>
+    </div>
   )
 }
 
