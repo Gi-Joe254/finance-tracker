@@ -31,6 +31,11 @@
   border-radius: 8px;
   overflow: hidden;
 }
+@media (min-width:600px) {
+  .transactions-table table {
+    table-layout: fixed;
+  }  
+}
 
 .transactions-table th,
 .transactions-table td {

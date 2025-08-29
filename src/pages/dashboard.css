@@ -3,9 +3,15 @@
   position: relative;
   width: 90%;
   margin: 0 auto;
-  background: var(--bg3);
+  background: var(--bg1);
   color: var(--text-accent3);
   
+}
+.dashboard header {
+  color: var(--text2);
+  position: absolute;
+  right: 6%;
+  display: none;
 }
 
 .user-settings-icon {
@@ -88,8 +94,29 @@
   grid-column: 1/ span 2;
 }
 
+.nav-logo {
+  padding: 20px;
+  text-align: center;
+}
+.nav-logo-img {
+  width: 60%;
+  margin: 30px auto;
+  height: 90px;
+  border-radius: 5px;
+  box-shadow: 0 6px 6px var(--text2);
+  padding-top: 20px;
+}
+.nav-logo-img svg {
+  height: 50px;
+}
+
+
 @media(min-width:769px) {
   .dashboard {
+    padding-left: 140px;
+  }
+  .dashboard header {
+    display: block;
   }
   .dash-header {
     padding-left: 20px;
@@ -97,16 +124,14 @@
   .greetings {
     padding-left: 40px;
   }
-}
-
-@media(min-width:1024px) {
   .dash-footer-nav {
     display: none;
   }
   .clickable-cards {
-    gap: 10px;
+    gap: 15px;
 }
   .clickable-cards > :nth-child(3) {
     height: 200px;
 }
 }
+

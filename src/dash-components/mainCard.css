@@ -8,7 +8,7 @@
   text-align: center;
   font-weight: 800;
   transition: 0.7s;
-  
+  z-index: 100;
   box-shadow: 2px 8px 10px var(--text3)
   
 } 

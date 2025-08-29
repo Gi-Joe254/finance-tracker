@@ -1,10 +1,26 @@
 .nav-bar-desktop {
-    width: 15%;
-    background: var(--text-accent4);
+    max-width: 160px;
+    min-width: 120px;
+    background: linear-gradient(to bottom, var(--dark-bg2) 40%, var(--text-accent1) 80%, var(--text-accent2) 100%);
+    color: var(--bg1);
     height: 100vh;
+   
 }
 .nav-links div {
-    background: red;
     display: flex;
-    margin: 0px auto 20px;
+    margin: 0px auto 15px;
+    width: 95%;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 0 0 15px;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+.nav-links div:hover {
+    text-decoration: underline;
+    background: #001f3f;
+    box-shadow: 0 6px 6px var(--text2);
+}
+.nav-links div svg {
+    width: 20px;
 }

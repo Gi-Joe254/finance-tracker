@@ -20,9 +20,9 @@
   width: 100%;
 }
 .root {
-  background: var(--bg3);
+  background: var(--bg1);
 }
 body {
   min-height: 100vh;
-  background: var(--bg3);
+  background: var(--bg1);
 }

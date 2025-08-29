@@ -11,6 +11,7 @@ import Nav from "../dash-components/nav-mobile";
 import { GrUserSettings } from "react-icons/gr";
 import NavDesktop from "../dash-components/nav-desktop";
 import NavMobile from "../dash-components/nav-mobile";
+import { Banknote } from "lucide-react/dist/cjs/lucide-react";
 
 
 export default function Dashboard() {
@@ -24,15 +25,18 @@ export default function Dashboard() {
 
     return(
         <>
-        <NavDesktop
-            goToHome={goToHome}
-            goToBudget={goToBudget}
-            goToStats={goToStats}
-            goToTransactions={goToTransactions}
-        >
-            <p className="nav-desktop-logo">Budgeting App</p>
-        </NavDesktop>
         <div className="dashboard">
+            <header>
+                <NavDesktop
+                    goToHome={goToHome}
+                    goToBudget={goToBudget}
+                    goToStats={goToStats}
+                    goToTransactions={goToTransactions}
+                >
+                    <p className="nav-logo">Budgeting App</p>
+                    <div className="nav-logo-img"><Banknote /></div>
+                </NavDesktop>
+            </header>
             <h1 className="dash-header">Dashboard</h1>
             <div className="user-settings-icon">
                 <GrUserSettings />
