@@ -7,7 +7,7 @@ import Transactions from './pages/transactions'
 import Budget from './pages/budget'
 import Stats from './pages/stats'
 import ProtectedRoute from './dash-components/protectedRoute'
-import Nav from './dash-components/nav';
+import Nav from './dash-components/nav-mobile';
 
 export default function App() {
   

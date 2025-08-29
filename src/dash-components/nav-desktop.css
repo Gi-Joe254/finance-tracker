@@ -1,0 +1,10 @@
+.nav-bar-desktop {
+    width: 15%;
+    background: var(--text-accent4);
+    height: 100vh;
+}
+.nav-links div {
+    background: red;
+    display: flex;
+    margin: 0px auto 20px;
+}

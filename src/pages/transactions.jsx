@@ -4,7 +4,8 @@ import { nanoid } from "nanoid"
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
 import { db } from "../firebase"
 import { useNavigate } from "react-router-dom"
-import Nav from "../dash-components/nav"
+import Nav from "../dash-components/nav-mobile"
+import NavMobile from "../dash-components/nav-mobile"
 
 export default function Transactions() {
 
@@ -177,7 +178,7 @@ export default function Transactions() {
             
         </div>
         <footer className="footer-nav">
-            <Nav 
+            <NavMobile 
                 goToHome={()=>{navigate("/dashboard")}}
                 goToTransactions={()=>{navigate("/transactions")}}
                 goToStats={()=>{navigate('/stats')}}

@@ -7,8 +7,10 @@ import BudgetCard from "../dash-components/budgetCard";
 import StatsCard from "../dash-components/statsCard";
 import TransactionsCard from "../dash-components/transactionsCard";
 import { signOut } from "firebase/auth";
-import Nav from "../dash-components/nav";
+import Nav from "../dash-components/nav-mobile";
 import { GrUserSettings } from "react-icons/gr";
+import NavDesktop from "../dash-components/nav-desktop";
+import NavMobile from "../dash-components/nav-mobile";
 
 
 export default function Dashboard() {
@@ -21,6 +23,15 @@ export default function Dashboard() {
     function goToHome() {navigate("/dashboard")}
 
     return(
+        <>
+        <NavDesktop
+            goToHome={goToHome}
+            goToBudget={goToBudget}
+            goToStats={goToStats}
+            goToTransactions={goToTransactions}
+        >
+            <p className="nav-desktop-logo">Budgeting App</p>
+        </NavDesktop>
         <div className="dashboard">
             <h1 className="dash-header">Dashboard</h1>
             <div className="user-settings-icon">
@@ -32,29 +43,33 @@ export default function Dashboard() {
                 </ul>
             </div>
             <p className="greetings">Hello {user.email}</p>
-            <div className="bal-card">
-                <BalanceCard>
-                    <div className="bal-card-header">Total Balance</div>
-                    <div className="bal-card-amt">Ksh: 20000</div>
-                </BalanceCard>
+            <div className="dash-cards">
+                <div className="bal-card">
+                    <BalanceCard>
+                        <div className="bal-card-header">Total Balance</div>
+                        <div className="bal-card-amt">Ksh: 20000</div>
+                    </BalanceCard>
+                </div>
+                <div className="clickable-cards">
+                    <BudgetCard 
+                        onClick={goToBudget}
+                    />
+                    <StatsCard 
+                        onClick={goToStats}
+                    />
+                    <TransactionsCard
+                        onClick={goToTransactions}
+                    />
+                </div>
             </div>
-            <div className="clickable-cards">
-                <BudgetCard 
-                    onClick={goToBudget}
-                />
-                <StatsCard 
-                    onClick={goToStats}
-                />
-                <TransactionsCard
-                    onClick={goToTransactions}
+            <div className="dash-footer-nav">
+                <NavMobile
+                    goToHome={goToHome}
+                    goToTransactions={goToTransactions}
+                    goToStats={goToStats}
+                    goToBudget={goToBudget}
                 />
             </div>
-            <Nav
-               goToHome={goToHome}
-               goToTransactions={goToTransactions}
-               goToStats={goToStats}
-               goToBudget={goToBudget}
-            />
-        </div> 
+        </div> </>
     )
 }

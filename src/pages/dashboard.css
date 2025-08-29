@@ -3,11 +3,11 @@
   position: relative;
   width: 90%;
   margin: 0 auto;
-  min-height: 100vh;
   background: var(--bg3);
   color: var(--text-accent3);
   
 }
+
 .user-settings-icon {
   
   width: 40px;
@@ -21,7 +21,7 @@
   cursor: pointer;
   color: var(--text1);
   width: 30px;
-  height: 30px;
+  height: 20px;
  
 }
 .user-settings-dropdown {
@@ -86,4 +86,27 @@
 }
 .clickable-cards > :nth-child(3) {
   grid-column: 1/ span 2;
+}
+
+@media(min-width:769px) {
+  .dashboard {
+  }
+  .dash-header {
+    padding-left: 20px;
+  }
+  .greetings {
+    padding-left: 40px;
+  }
+}
+
+@media(min-width:1024px) {
+  .dash-footer-nav {
+    display: none;
+  }
+  .clickable-cards {
+    gap: 10px;
+}
+  .clickable-cards > :nth-child(3) {
+    height: 200px;
+}
 }

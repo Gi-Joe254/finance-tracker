@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import "./budget.css"
 import { nanoid } from "nanoid"
-import Nav from "../dash-components/nav"
+import Nav from "../dash-components/nav-mobile"
 import { useNavigate } from "react-router-dom"
 
 export default function Budget() {

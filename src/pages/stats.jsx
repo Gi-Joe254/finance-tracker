@@ -5,8 +5,9 @@ import { db } from "../firebase"
 import CategoryChart from "../statsCharts/categoryChart"
 import DateChart from "../statsCharts/dateChart"
 import CatBarChart from "../statsCharts/catBarChart"
-import Nav from "../dash-components/nav"
+import Nav from "../dash-components/nav-mobile"
 import { useNavigate } from "react-router-dom"
+import NavMobile from "../dash-components/nav-mobile"
 
 export default function Stats() {
     const [income, setIncome] = useState(100000)
@@ -102,7 +103,7 @@ export default function Stats() {
             No recorded transactions
         </p>}
         <footer className="footer-nav">
-            <Nav 
+            <NavMobile
                 goToHome={()=>{navigate("/dashboard")}}
                 goToTransactions={()=>{navigate("/transactions")}}
                 goToStats={()=>{navigate('/stats')}}

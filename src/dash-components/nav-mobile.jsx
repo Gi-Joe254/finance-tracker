@@ -1,11 +1,11 @@
-import "./nav.css"
+import "./nav-mobile.css"
 import { ArrowLeftRight, ChartBar, Home, Settings, Wallet } from "lucide-react"
 
-export default function Nav({children,goToBudget,goToHome,goToStats,goToTransactions}) {
+export default function NavMobile({children,goToBudget,goToHome,goToStats,goToTransactions}) {
     
     return(
+        <>
         <div className="nav-bar-mobile">
-            <div>{children}</div>
             <ul>
                 <li onClick={goToHome}><Home /></li>
                 <li onClick={goToTransactions}><ArrowLeftRight/></li>
@@ -14,5 +14,7 @@ export default function Nav({children,goToBudget,goToHome,goToStats,goToTransact
                 <li><Settings /></li>
             </ul>
         </div>
+       
+        </>
     )
 }
