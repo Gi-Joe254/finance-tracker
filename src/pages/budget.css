@@ -1,10 +1,10 @@
 .budget {
   background: var(--bg2);
-  padding: 20px;
+  padding: 60px 20px 100px;
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   max-width: 600px;
-  margin: 20px auto;
+  margin: 0 auto;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -13,6 +13,7 @@
   color: #333;
   margin-bottom: 15px;
   text-align: center;
+  text-shadow: 2px 8px 10px var(--text-accent4);
 }
 
 .budget-setup,
@@ -30,7 +31,8 @@
 .add-expense input {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--text-accent4);
+  background: var(--bg1);
   width: 180px;
   outline: none;
   font-size: 0.95rem;
@@ -39,7 +41,7 @@
 
 .budget-setup input:focus,
 .add-expense input:focus {
-  border-color: #4caf50;
+  border-color: var(--text-accent3);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
 
@@ -166,4 +168,10 @@
 
 .user-expenses button:hover {
   background: #1565c0;
+}
+
+.footer-nav {
+  position: fixed;
+  bottom: 0; 
+  z-index: 1000;
 }

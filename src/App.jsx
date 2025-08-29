@@ -1,18 +1,20 @@
 import { useState } from 'react'
 import './App.css';
 import Login from './pages/login'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom'
 import Dashboard from './pages/dashboard'
 import Transactions from './pages/transactions'
 import Budget from './pages/budget'
 import Stats from './pages/stats'
 import ProtectedRoute from './dash-components/protectedRoute'
+import Nav from './dash-components/nav';
 
 export default function App() {
+  
 
   return (
     <div className="router-container">
-      <Router>
+    
         <Routes>
           <Route path="/" element={<Login />} />    
           <Route
@@ -35,7 +37,9 @@ export default function App() {
             path="/stats" 
             element={
               <ProtectedRoute>
-                <Stats />
+                    
+                  <Stats />
+                  
               </ProtectedRoute>
             } 
           />
@@ -49,7 +53,7 @@ export default function App() {
           />
         </Routes>
         
-      </Router>
+      
     </div>
   )
 }

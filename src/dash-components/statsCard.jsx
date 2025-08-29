@@ -1,12 +1,13 @@
-import MainCard from "./MainCard";
+import { ChartBar } from "lucide-react/dist/cjs/lucide-react";
+import MainCard from "./mainCard";
 
-export default function StatsCard({stats, onClick}) {
+export default function StatsCard({ onClick}) {
     return(
         <MainCard 
             title={'Stats'}
             onClick={onClick}
         >
-            {stats}
+            <div><ChartBar /></div>
         </MainCard>
         
     )

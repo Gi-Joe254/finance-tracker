@@ -6,10 +6,10 @@
     justify-content: center;
     font-size: 1.8rem;
     font-weight: 800;
-    width: 99%;
+    width: 95%;
     margin: 0 auto 10px;
-    background: linear-gradient(135deg, var(--text-accent1) 0%, var(--text-accent3) 100%);
-    border-radius: 16px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    background: linear-gradient(135deg, var(--dark-bg3) 0%, var(--bg3) 100%);
+    border-radius: 5px;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
     font-family: var(--font-heading)
 }

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import "./budget.css"
 import { nanoid } from "nanoid"
+import Nav from "../dash-components/nav"
+import { useNavigate } from "react-router-dom"
 
 export default function Budget() {
     const [budgetAmount, setBudgetAmount] = useState('')
@@ -14,6 +16,8 @@ export default function Budget() {
 
     const budgetInputRef = useRef(null)
     const nameInputRef = useRef(null)
+
+    const navigate = useNavigate()
     
     useEffect(()=>{
         budgetInputRef.current.focus()
@@ -65,10 +69,9 @@ export default function Budget() {
     }
 
     return (
-        <div className="budget">
+        <><div className="budget">
             <h1 className="budget-header">Budget</h1>
 
-            {/* Budget Setup */}
             <div className="budget-setup">
                 <label>Set Budget:</label>
                 <input 
@@ -80,7 +83,6 @@ export default function Budget() {
                 />
             </div>
 
-            {/* Spending Info */}
             <div className="budget-info">
                 <p><strong>Budget:</strong> {budgetAmount} </p>
                 <p><strong>Spent:</strong> ${spent} </p>
@@ -95,7 +97,6 @@ export default function Budget() {
                 </p>
             </div>
 
-            {/* Progress Bar */}
             <div className="progress-bar">
                 <div 
                     className="progress-fill"
@@ -107,7 +108,6 @@ export default function Budget() {
                 ></div>
             </div>
 
-            {/* Add Expense */}
             <div className="add-expense">
                 <form onSubmit={addExpense}>
                     <input 
@@ -156,8 +156,16 @@ export default function Budget() {
             </div>
             
             }
-            
+        
         </div>
+        <footer className="footer-nav">
+            <Nav 
+                goToHome={()=>{navigate("/dashboard")}}
+                goToTransactions={()=>{navigate("/transactions")}}
+                goToStats={()=>{navigate('/stats')}}
+                goToBudget={()=>{navigate('/budget')}}
+            />
+        </footer></>
     )
 }
 

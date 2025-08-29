@@ -3,6 +3,8 @@ import "./transactions.css"
 import { nanoid } from "nanoid"
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
 import { db } from "../firebase"
+import { useNavigate } from "react-router-dom"
+import Nav from "../dash-components/nav"
 
 export default function Transactions() {
 
@@ -10,6 +12,8 @@ export default function Transactions() {
     const [description, setDescription] = useState('')
     const [transAmount, setTransAmount] = useState('')
     const [date, setDate] = useState('')
+
+    const navigate = useNavigate()
 
 //to store data from firestore >..
     const [transactionTile, setTransactionTile] = useState([])
@@ -74,7 +78,7 @@ export default function Transactions() {
     },[])
 
     return(
-        <div className="transactions-page">
+        <><div className="transactions-page">
             <h1 className="transactions-header">Transactions</h1>
             <div className="transactions-table">
                 <table>
@@ -104,7 +108,9 @@ export default function Transactions() {
                     </tbody>                       
 
                 </table>
-                {!transactionTile && <p>No transactions here</p>}
+                {transactionTile.length < 1 && <p
+                    style={{color:'var(--text1)'}}
+                >No transactions here</p>}
                 
             </div>
             <button 
@@ -116,11 +122,11 @@ export default function Transactions() {
                 >
                     New Transaction
             </button>
-            <button 
+            {transactionTile.length >= 1 && <button 
                 onClick={handleDelete}
                 className="del-trans-btn"
             >Delete All
-            </button>
+            </button>}
             <div 
                 className="add-transactions" 
                 style={{display:addTransShown ? 'block':'none'}}
@@ -168,6 +174,15 @@ export default function Transactions() {
                     <button>Save Transaction</button>
                 </form>
             </div>
+            
         </div>
+        <footer className="footer-nav">
+            <Nav 
+                goToHome={()=>{navigate("/dashboard")}}
+                goToTransactions={()=>{navigate("/transactions")}}
+                goToStats={()=>{navigate('/stats')}}
+                goToBudget={()=>{navigate('/budget')}}
+            />
+        </footer></>
     )
 }

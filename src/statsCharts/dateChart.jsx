@@ -4,7 +4,7 @@ export default function DateChart({ data }) {
  
   return (
     <AreaChart width={400} height={300} data={data}>
-      <Area type='monotone' dataKey='amt' stroke="red" fill="blue"/>
+      <Area type='monotone' dataKey='amt' stroke="red" fill="var(--text1)"/>
       <XAxis dataKey='dat' reversed />
       <YAxis />
       <Tooltip />

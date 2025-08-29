@@ -1,4 +1,4 @@
-import { Bar, BarChart, XAxis, YAxis, Tooltip, Cell } from "recharts";
+import { Bar, BarChart, XAxis, YAxis, Tooltip, Cell, Legend } from "recharts";
 
 export default function CatBarChart({ data }) {
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"]
@@ -10,8 +10,7 @@ export default function CatBarChart({ data }) {
         ))}
       </Bar>
       <XAxis dataKey="cat" /> 
-      <YAxis />          
-      <Tooltip />       
+      <YAxis />     
     </BarChart>
   );
 }

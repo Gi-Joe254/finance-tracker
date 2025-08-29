@@ -13,16 +13,12 @@ import { GrUserSettings } from "react-icons/gr";
 
 export default function Dashboard() {
     const [ user, loading] = useAuthState(auth)
-    const navigate = useNavigate();
-    function goToTransactions() {
-        navigate("/transactions")
-    }
-    function goToStats() {
-        navigate("/stats")
-    }
-    function goToBudget() {
-        navigate("/budget")
-    }
+    const navigate = useNavigate()
+
+    function goToBudget() {navigate("/budget")}
+    function goToTransactions() {navigate("/transactions")}
+    function goToStats() {navigate("/stats")}
+    function goToHome() {navigate("/dashboard")}
 
     return(
         <div className="dashboard">
@@ -36,22 +32,29 @@ export default function Dashboard() {
                 </ul>
             </div>
             <p className="greetings">Hello {user.email}</p>
-            <BalanceCard 
-                title= 'Balance'
-                balance='200'
-            />
+            <div className="bal-card">
+                <BalanceCard>
+                    <div className="bal-card-header">Total Balance</div>
+                    <div className="bal-card-amt">Ksh: 20000</div>
+                </BalanceCard>
+            </div>
             <div className="clickable-cards">
                 <BudgetCard 
-                onClick={goToBudget}
+                    onClick={goToBudget}
                 />
                 <StatsCard 
-                    onClick = {goToStats}
+                    onClick={goToStats}
                 />
                 <TransactionsCard
-                    onClick = {goToTransactions}
+                    onClick={goToTransactions}
                 />
             </div>
-            <Nav />
+            <Nav
+               goToHome={goToHome}
+               goToTransactions={goToTransactions}
+               goToStats={goToStats}
+               goToBudget={goToBudget}
+            />
         </div> 
     )
 }

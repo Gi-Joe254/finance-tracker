@@ -10,10 +10,11 @@
   background: var(--bg1);
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 2px 8px 10px var(--text-accent4);
+  box-shadow: 2px 8px 10px var(--text-accent1);
   text-align: center;
   width: 100%;
   max-width: 380px;
+  margin-top: 50px;
 }
 
 /* Heading */
@@ -30,14 +31,14 @@
   width: 90%;
   padding: 0.9rem;
   margin: 0.6rem 0;
-  border: 1px solid var(--bg1);
+  border: 1px solid var(--text-accent4);
   border-radius: 8px;
   font-size: 1rem;
   font-family: var(--font-body);
   outline: none;
   transition: border 0.2s;
-  color: var(--bg3);
-  background: var(--dark-bg2);
+  color: #444;
+  background: white;
 }
 
 .login-card input:focus {
@@ -49,7 +50,7 @@
   width: 80%;
   padding: 0.9rem;
   margin-top: 1.5rem;
-  background: var(--text3);
+  background: var(--btn-color1);
   color: var(--dark-bg1);
   border: none;
   border-radius: 10px;
@@ -57,7 +58,7 @@
   font-family: var(--font-heading);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.6s, transform 0.2s;
 }
 
 .login-card button:hover {

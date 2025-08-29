@@ -8,6 +8,13 @@ export default function CategoryChart ({ data }) {
         width={400}
         height={300}
     >
+        <Legend 
+            layout="horizontal"
+            verticalAlign="right"
+            wrapperStyle={{
+                margin:'30px 0 0 80px'
+            }}
+        />
         <Pie
             data={data}
             dataKey='amt'
@@ -26,7 +33,6 @@ export default function CategoryChart ({ data }) {
             ))}
         </Pie>
         <Tooltip />
-        <Legend />
     </PieChart>
   )
 }

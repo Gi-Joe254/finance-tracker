@@ -14,15 +14,12 @@
   --text-accent3: #16A34A;
   --text-accent4: #CA8A04;
 
-  --btn-color1: #2563EB;
-  --btn-color2: #64748B;
+  --btn-color1: #4caf50;
+  --btn-color2: #2563EB;
   --btn-color3: #DC2626;
   --btn-color3: #16A34A;
 
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Roboto', sans-serif;
 
-}
-.router-container {
-  width: 100%;
 }

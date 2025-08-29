@@ -5,12 +5,16 @@ import { db } from "../firebase"
 import CategoryChart from "../statsCharts/categoryChart"
 import DateChart from "../statsCharts/dateChart"
 import CatBarChart from "../statsCharts/catBarChart"
+import Nav from "../dash-components/nav"
+import { useNavigate } from "react-router-dom"
 
 export default function Stats() {
     const [income, setIncome] = useState(100000)
     const [balance, setBalance] = useState(0)
     const [expenses, setExpenses] = useState(0)
     const [list, setList] = useState([])
+
+    const navigate = useNavigate()
 
     const categoryData = []
     list.forEach(item => {
@@ -56,6 +60,7 @@ export default function Stats() {
     },[])
    
     return(
+        <>
         <div className="stats">
             <h1 className="stats-header">Stats</h1>
 
@@ -65,22 +70,46 @@ export default function Stats() {
                 <p>Net Balance: {balance}</p>
             </div>
 
-            <div className="category-chart">
-                <h2>By Category</h2>
-                <CategoryChart
-                    data={categoryData}
-                />
-                 <CatBarChart
-                    data={categoryData}
-                />
-            </div>
-            <div className="date-chart">
-                <h2>By Date</h2>
-                 <DateChart 
-                    data={dateData}
-                />
-            </div>
+            {expenses > 0 && <div className="charts">
+                <div className="category-chart">
+                    <h2>By Category</h2>
+                    <div className="category-chart-item">
+                        <CategoryChart
+                            data={categoryData}
+                        />
+                        <CatBarChart
+                            data={categoryData}
+                        />
+                    </div>                
+                </div>
+                <div className="date-chart">
+                    <h2>By Date</h2>
+                    <DateChart 
+                        data={dateData}
+                    />
+                </div>
+            </div>}
+            
+            
         </div>
+        {expenses === 0 && <p
+            style={{
+                color:'var(--text2)',
+                paddingTop: '100px',
+                textAlign: 'center'
+            }}
+        >
+            No recorded transactions
+        </p>}
+        <footer className="footer-nav">
+            <Nav 
+                goToHome={()=>{navigate("/dashboard")}}
+                goToTransactions={()=>{navigate("/transactions")}}
+                goToStats={()=>{navigate('/stats')}}
+                goToBudget={()=>{navigate('/budget')}}
+            />
+        </footer>
+        </>
 
     )
 }

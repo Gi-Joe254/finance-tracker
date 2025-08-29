@@ -1,12 +1,11 @@
 import MainCard from "./mainCard";
 import "./balanceCard.css"
 
-export default function BalanceCard({balance, title}) {
+export default function BalanceCard({children}) {
     
     return(
         <div className="balance-card">
-            <p>{title}</p>
-            <p>{balance}</p>
+            {children}
         </div>
     )
 }

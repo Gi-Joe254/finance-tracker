@@ -6,19 +6,20 @@
   border-radius: 25px;
   height: 150px;
   text-align: center;
-  justify-content: center;
-  font-size: 1.4rem;
   font-weight: 800;
   transition: 0.7s;
-  box-shadow: 0 6px 12px var(--text3); 
+  
+  box-shadow: 2px 8px 10px var(--text3)
+  
 } 
 .main-card:hover { 
   transform: translateY(-2px); 
-  box-shadow: 0 6px 12px var(--text3); 
+  box-shadow: 0 6px 12px var(--text-accent4); 
 } 
-.main-card-title { 
-  
-} 
-.main-card-content { 
-  font-size: 1rem; 
+
+.main-card-content svg { 
+  height:60px;
+  margin: 20px auto;
+  width: 60px;
+
 } 
