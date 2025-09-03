@@ -7,13 +7,21 @@
   color: var(--text-accent3);
   
 }
+/*wide view sidebar*/
 .dashboard header {
   color: var(--text2);
   position: absolute;
   right: 6%;
   display: none;
 }
-
+.dash-header {
+  color: var(--text2);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-shadow: 0px 8px 10px var(--text3);
+  padding-left: 4%;
+}
 .user-settings-icon {
   
   width: 40px;
@@ -56,33 +64,61 @@
   cursor: pointer;
   
 }
-.greetings { 
-  color: var(--text2); 
-  padding-left: 10px;
-  font-size: 0.6rem;
+.set-bal{
+  background: var(--bg1);
+  position: fixed;
+  top: 0 ; 
+  left: 0;
+  height: 100vh; 
+  background: rgba(0,0,0,0.9); 
+  z-index: 1000;
+  padding: 100px 50px;
+}
+.set-bal h3 {
+  text-align: center;
+  margin-bottom: 100px;
+}
+.set-bal input {
+  max-width: 200px;
+  display: block;
+  margin: 0 auto 20px;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid var(--bg3);
+  font-size: 1.2rem;
+  outline: none;
+}
+.set-bal button {
+  display: block;
+  margin: 30px auto;
+  width: 300px ;
+  cursor: pointer;
 }
 
-.dash-header {
+.greetings { 
   color: var(--text2);
-  font-family: var(--font-heading);
-  font-size: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
   text-shadow: 0px 8px 10px var(--text3);
- 
 }
 
 .bal-card {
-  color: var(--text3);
-  text-align: right;
+  color: var(--bg1);
+  text-align: left;
+
 }
 .bal-card-header {
   font-size: 0.7rem;
+  padding-left: 60px;
 }
 .bal-card-amt {
   font-family: var(--font-body);
   font-size: 1.6rem;
-  color: var(--text2);
+  color: var(--bg3);
+  padding-left: 60px;
 }
 .clickable-cards {
+  text-align: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 5px;
@@ -133,5 +169,6 @@
   .clickable-cards > :nth-child(3) {
     height: 200px;
 }
+
 }
 

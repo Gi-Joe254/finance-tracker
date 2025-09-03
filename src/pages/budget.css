@@ -10,7 +10,7 @@
 
 .budget-header {
   font-size: 1.8rem;
-  color: #333;
+  color: var(--text3);
   margin-bottom: 15px;
   text-align: center;
   text-shadow: 2px 8px 10px var(--text-accent4);
@@ -54,9 +54,8 @@
 
 .add-expense button {
   padding: 10px 16px;
-  border: none;
   border-radius: 10px;
-  background: #4caf50;
+  background: var(--dark-bg1);
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -64,7 +63,7 @@
 }
 
 .add-expense button:hover {
-  background: #43a047;
+  background: var(--text2);
 }
 
 .budget-info {
@@ -90,7 +89,7 @@
 
 .progress-fill {
   height: 100%;
-  transition: width 0.3s ease;
+  transition: width 0.6s ease;
 }
 
 .user-expenses {
@@ -125,41 +124,38 @@
   transform: translateY(-2px);
 }
 
-.expense-options {
-  margin-top: 10px;
-}
-
 .expense-options button {
+  width: 70px;
+  float: right;
+  clear: left;
   margin-right: 10px;
   padding: 6px 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.85rem;
+  
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.expense-options button:first-child {
-  background: #ffb300; /* amber for edit */
-  color: #fff;
-}
-
-.expense-options button:first-child:hover {
-  background: #ffa000;
-}
-
 .expense-options button:last-child {
-  background: #e53935; /* red for delete */
-  color: #fff;
+  background: var(--text-accent4); 
+  color: var(--bg1);
 }
 
 .expense-options button:last-child:hover {
-  background: #c62828;
+  background: var(--dark-bg1); 
+}
+
+.expense-options button:first-child {
+  background: var(--btn-color3); 
+  color: var(--bg1);
+}
+
+.expense-options button:first-child:hover {
+  background: var(--btn-color1); 
 }
 
 .user-expenses button {
   margin-top: 10px;
-  background: #1976d2; /* blue for Save Budget */
+  background: var(--text2); /* blue for Save Budget */
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -168,7 +164,69 @@
 }
 
 .user-expenses button:hover {
-  background: #1565c0;
+  background: var(--text1);
+}
+
+.saved-budget {
+  background: var(--bg2);
+  margin: 60px auto 0;
+  padding: 30px;
+  width: 90%;
+  border-radius: 15px;
+}
+.saved-budget p {
+  background: var(--bg1);
+}
+.saved-budget header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text3);
+  margin-bottom: 15px;
+  text-align: center;
+  text-shadow: 2px 8px 10px var(--text-accent4);
+}
+.saved-budget-content {
+  background: var(--bg1);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.saved-budget-content ul {
+  list-style: none;
+}
+.saved-budget-content button {
+  width: 20%;
+  margin: 20px 0 10px 80%;
+  cursor: pointer;
+  padding: 2px;
+  color: var(--text1);
+  background: transparent;
+  border: none;
+
+  transition: background 0.6s ease;
+}
+.saved-budget-content button:hover {
+  color: var(--text-accent4);
+}
+
+.show-hide-budget-btn {
+  background: transparent;
+  color: var(--text1);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 50%;
+  display: block;
+  margin: 100px auto 0;
+
+  transition: color 0.6s ease;
+  
+}
+.show-hide-budget-btn:hover {
+  color: var(--text-accent4);
 }
 
 .footer-nav {

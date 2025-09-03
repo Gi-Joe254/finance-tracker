@@ -2,14 +2,12 @@
     height: 150px;
     display: flex;
     flex-direction: column;
-    text-align: center;
     justify-content: center;
-    font-size: 1.8rem;
-    font-weight: 800;
     width: 95%;
-    margin: 0 auto 10px;
-    background: linear-gradient(135deg, var(--dark-bg3) 0%, var(--bg3) 100%);
+    margin: 10px auto;
+    background: linear-gradient(135deg, var(--dark-bg2) 40%, var(--dark-bg1) 0%, var(--dark-bg2) 100%);
     border-radius: 5px;
     box-shadow: 0 6px 10px rgba(0,0,0,0.15);
     font-family: var(--font-heading)
+    
 }

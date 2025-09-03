@@ -1,8 +1,14 @@
 .nav-bar-mobile {
     color: var(--text3);
-    background: var(--bg3);
+    background: var(--bg1);
     height: 60px;
     padding: 10px;
+    
+}
+.nav-bar-mobile svg:hover {
+
+    color:  var(--text-accent4);
+    transition: 0.6s;
 }
 .nav-bar-mobile ul {
     display: flex;
@@ -23,4 +29,14 @@
     cursor: pointer;
     color: var(--text1);
     width: 20px;
+}
+
+@media(min-width:768px) {
+    .nav-bar-mobile svg {
+        width: 20px;
+    }
+    .nav-bar-mobile {
+        margin: 0 auto;
+        width: 50%;
+    }
 }

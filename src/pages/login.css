@@ -10,15 +10,17 @@
   background: var(--bg1);
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 2px 8px 10px var(--text-accent1);
+  box-shadow: 0px 0px 10px var(--bg3);
   text-align: center;
-  width: 100%;
-  max-width: 380px;
-  margin-top: 50px;
+  width: 60%;
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Heading */
 .login-card h1 {
+  flex: 1 1 10%;
   font-family: var(--font-heading);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -29,29 +31,28 @@
 /* Inputs */
 .login-card input {
   width: 90%;
-  padding: 0.9rem;
-  margin: 0.6rem 0;
-  border: 1px solid var(--text-accent4);
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 2rem 0.5rem 0.8rem;
+  border: none;
+  border-bottom: 1px solid var(--text1);
+  font-size: 0.8rem;
   font-family: var(--font-body);
-  outline: none;
   transition: border 0.2s;
+  outline: none;
   color: #444;
   background: white;
 }
 
 .login-card input:focus {
-  border: 1px solid var(--text3);
+  border-bottom: 1px solid var(--text-accent4);
 }
 
 /* Button */
 .login-card button {
   width: 80%;
-  padding: 0.9rem;
+  padding: 0.8rem;
   margin-top: 1.5rem;
-  background: var(--btn-color1);
-  color: var(--dark-bg1);
+  background: var(--text2);
+  color: var(--bg1);
   border: none;
   border-radius: 10px;
   font-size: 1rem;
@@ -60,11 +61,18 @@
   cursor: pointer;
   transition: background 0.6s, transform 0.2s;
 }
+.login-card button:last-child {
+  background: transparent;
+  color: var(--text2);
+  border: none;
+}
 
-.login-card button:hover {
-  color: var(--bg1);
-  background: var(--text-accent4);
+.login-card button:first-child:hover {
   box-shadow: 2px 8px 10px var(--text-accent4);
+  
+}
+.login-card button:last-child:hover {
+  color: var(--text-accent4);
   
 }
 
@@ -73,4 +81,17 @@
   font-size: 0.9rem;
   margin-top: 1rem;
   color: var(--text2);
+}
+
+@media(min-width: 769px) {
+  .login-card {
+    flex-direction: row;
+  }
+  .login-card h1 {
+    font-size: 4rem;
+    margin: 30px 30px 0 0;
+  }
+  .login-card input {
+  width: 80%;
+  }
 }

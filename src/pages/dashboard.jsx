@@ -12,11 +12,18 @@ import { GrUserSettings } from "react-icons/gr";
 import NavDesktop from "../dash-components/nav-desktop";
 import NavMobile from "../dash-components/nav-mobile";
 import { Banknote } from "lucide-react/dist/cjs/lucide-react";
+import { useState } from "react";
 
 
 export default function Dashboard() {
     const [ user, loading] = useAuthState(auth)
     const navigate = useNavigate()
+
+    const [balSetnShown, setBalSetnShown] = useState(false)
+    const [userBal, setUserBal] = useState(0)
+    const [totalBal, setTotalBal] = useState(0)
+
+    
 
     function goToBudget() {navigate("/budget")}
     function goToTransactions() {navigate("/transactions")}
@@ -41,17 +48,34 @@ export default function Dashboard() {
             <div className="user-settings-icon">
                 <GrUserSettings />
                 <ul className="user-settings-dropdown">
-                    <li>Manage Account</li>
-                    <li>Set Theme</li>
-                    <li  onClick={()=>{signOut(auth)}}>Logout</li>
+                    <li onClick={()=>{setBalSetnShown(prev => (!prev))}}>
+                        Manage Account
+                    </li>
+                    <li onClick={()=>{signOut(auth)}}>Logout</li>
                 </ul>
             </div>
-            <p className="greetings">Hello {user.email}</p>
+            <p className="greetings">Hello, {user.email.split('@')[0]}</p>
             <div className="dash-cards">
                 <div className="bal-card">
                     <BalanceCard>
-                        <div className="bal-card-header">Total Balance</div>
-                        <div className="bal-card-amt">Ksh: 20000</div>
+                        <div className="bal-card-header">Total Balance:</div>
+                        <div className="bal-card-amt">Ksh{totalBal}</div>
+
+                        {balSetnShown && 
+                            <div className="set-bal">
+                                <h3>Set Initial Balance</h3>
+                                <input
+                                    placeholder="Amount" 
+                                    value={userBal}
+                                    onChange={(e) => {setUserBal(e.target.value)}}
+                                />
+                                <button
+                                    onClick={()=> {setTotalBal(userBal); setBalSetnShown(false)}}
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        }
                     </BalanceCard>
                 </div>
                 <div className="clickable-cards">

@@ -9,7 +9,7 @@
 .nav-links div {
     display: flex;
     margin: 0px auto 15px;
-    width: 95%;
+    width: 90%;
     border-radius: 5px;
     cursor: pointer;
     padding: 5px 0 0 15px;
@@ -23,4 +23,10 @@
 }
 .nav-links div svg {
     width: 20px;
+}
+
+.nav-link.active {
+    text-decoration: underline;
+    background: #001f3f;
+    box-shadow: 0 6px 6px var(--text2);
 }

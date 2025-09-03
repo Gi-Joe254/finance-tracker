@@ -32,21 +32,28 @@ const [userPassword, setUserPassword] = useState('12345678')
             <div className="login-card">
                 <h1>Finance Tracker</h1>
                 <form>
-                    <input 
-                        type="email" 
-                        placeholder="Email" 
-                        value={userEmail} 
-                        onChange={(e) => setUserEmail(e.target.value)}
-                        required />
-                    <input 
-                        type="password" 
-                        placeholder="Password" 
-                        value={userPassword} 
-                        onChange={(e) => setUserPassword(e.target.value)}
-                        required />
-                    <button onClick={(e)=>{handleSubmit(e, 'login')}}>Login</button>
-                    <span>Or</span>
-                    <button onClick={(e)=>{handleSubmit(e, 'signup')}}>Signup</button>
+                    <div>
+                        <input 
+                            type="email" 
+                            placeholder="Email" 
+                            value={userEmail} 
+                            onChange={(e) => setUserEmail(e.target.value)}
+                            required 
+                        />
+                        <input 
+                            type="password" 
+                            placeholder="Password" 
+                            value={userPassword} 
+                            onChange={(e) => setUserPassword(e.target.value)}
+                            required 
+                        />
+                    </div>
+                    <div>
+                        <button onClick={(e)=>{handleSubmit(e, 'login')}}>Login</button>
+                        <span>Don't Have an Account?</span>
+                        <button onClick={(e)=>{handleSubmit(e, 'signup')}}>Signup</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>

@@ -3,6 +3,9 @@ import "./budget.css"
 import { nanoid } from "nanoid"
 import Nav from "../dash-components/nav-mobile"
 import { useNavigate } from "react-router-dom"
+import NavMobile from "../dash-components/nav-mobile"
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot } from "firebase/firestore"
+import { db } from "../firebase"
 
 export default function Budget() {
     const [budgetAmount, setBudgetAmount] = useState('')
@@ -11,6 +14,8 @@ export default function Budget() {
     const [expenses, setExpenses] = useState([])
     const [spent, setSpent] = useState(0)
     const remaining = budgetAmount - spent
+
+    const [budgetSaved, setBudgetSaved] = useState([])
     
     const [itemPressed, setItemPressed] = useState(null)
 
@@ -18,7 +23,13 @@ export default function Budget() {
     const nameInputRef = useRef(null)
 
     const navigate = useNavigate()
+
+    const [savedBudgetShown, setSavedBudgetShown] = useState(false)
     
+    function show () {
+        setSavedBudgetShown(prev => !prev)
+    }
+
     useEffect(()=>{
         budgetInputRef.current.focus()
     },[])
@@ -61,12 +72,44 @@ export default function Budget() {
         
     },[spent])
 
-    function saveBudget() {
-        setBudgetAmount('')
-        setExpenses('')
-        setSpent(0)
-        budgetInputRef.current.focus()
+    async function saveBudget() {
+        try{
+            await addDoc(collection(db,'budget'),{
+                budget: Number(budgetAmount),
+                spent: Number(spent),
+                expenses: expenses
+            })
+            
+            setExpenses([])
+            setSpent(0)
+            budgetInputRef.current.focus()
+
+            console.log('budget saved')
+        }catch(err) {
+            alert('error, budget not saved')
+        }
     }
+
+    useEffect(()=> {
+        const unsub = onSnapshot(collection(db, 'budget'), (snapshot) =>{
+            const budgetList = snapshot.docs.map(item => ({
+                id: item.id,
+                ...item.data()
+        }))
+        setBudgetSaved(budgetList)
+        })
+        return() => unsub()
+    },[])
+    
+    async function delBudget(id) {
+        try{
+            const budgetTile = doc(db, 'budget',id)
+            await deleteDoc(budgetTile)
+        }catch(err) {
+            alert('error, not deleted')
+        }
+    }
+
 
     return (
         <><div className="budget">
@@ -84,10 +127,10 @@ export default function Budget() {
             </div>
 
             <div className="budget-info">
-                <p><strong>Budget:</strong> {budgetAmount} </p>
+                <p><strong>Budget:</strong> ${budgetAmount} </p>
                 <p><strong>Spent:</strong> ${spent} </p>
                 <p><strong>Remaining:</strong> ${remaining} </p>
-                <p><strong>Status:</strong> 
+                <p><strong>Status: </strong> 
                     {budgetAmount === '' ?
                     '':
                     remaining >= 0 ?
@@ -140,7 +183,7 @@ export default function Budget() {
                                 
                                 setItemPressed(prev=> (item.id === prev ? null : item.id))}}
                         >
-                            {item.name} - {item.amount}
+                            <span>{item.name}</span><span>{item.amount}</span>
                             <div 
                                 className="expense-options"
                                 style={{display: itemPressed === item.id? 'block':'none'}}
@@ -148,18 +191,43 @@ export default function Budget() {
                             >
                                 <button onClick={() => editItem(item.id)}>Edit</button>
                                 <button onClick={() => deleteItem(item.id)}>Delete</button>
+                                
+                                
                             </div>
                         </li>))}
                     
                 </ul>
                 {remaining === 0 && <button onClick={saveBudget}>Save Budget</button>}
             </div>
-            
-            }
         
+            }
+        <button className="show-hide-budget-btn" onClick={show}>{savedBudgetShown ? 'Hide': 'Show'} Previous Budgets</button>
+        </div>
+        <div 
+            className="saved-budget"
+            style={{
+                display: savedBudgetShown ? 'block' : 'none'
+            }}
+        >
+            <header>Saved Budgets</header>
+            {budgetSaved.length >= 1 ?
+                budgetSaved.map((item) => (
+                <div className="saved-budget-content" key={item.id}>
+                    <div>
+                        <h4>Budget Amount: {item.budget}</h4>
+                        {item.expenses && (item.expenses.map(i => (
+                            <ul key={i.id}> 
+                                <li>{i.name} - {i.amount}</li> 
+                            </ul>
+                        ))
+                        )}
+                        <button onClick={() => delBudget(item.id)}>Delete Budget</button>
+                    </div>  
+                </div>
+            )): <p>Nothing to show</p>}
         </div>
         <footer className="footer-nav">
-            <Nav 
+            <NavMobile 
                 goToHome={()=>{navigate("/dashboard")}}
                 goToTransactions={()=>{navigate("/transactions")}}
                 goToStats={()=>{navigate('/stats')}}

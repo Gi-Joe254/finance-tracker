@@ -11,10 +11,8 @@ export default function NavMobile({children,goToBudget,goToHome,goToStats,goToTr
                 <li onClick={goToTransactions}><ArrowLeftRight/></li>
                 <li onClick={goToStats}><ChartBar/></li>
                 <li onClick={goToBudget}><Wallet /></li>
-                <li><Settings /></li>
             </ul>
         </div>
-       
         </>
     )
 }

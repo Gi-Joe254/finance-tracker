@@ -6,13 +6,14 @@
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0px 0px 3px var(--text1);
 }
 
 .transactions-header {
   text-align: center;
   font-size: 2rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text3);
   margin-bottom: 1.5rem;
   text-shadow: 2px 8px 10px var(--text-accent4);
 }
@@ -31,11 +32,6 @@
   border-radius: 8px;
   overflow: hidden;
 }
-@media (min-width:600px) {
-  .transactions-table table {
-    table-layout: fixed;
-  }  
-}
 
 .transactions-table th,
 .transactions-table td {
@@ -44,44 +40,53 @@
 }
 
 .transactions-table th {
-  background: var(--text-accent3);
+  background: var(--dark-bg2);
   color: var(--bg1);
   font-weight: 500;
   padding: 0.75rem 1rem;
 }
 
 .transactions-table td {
-  color: #374151;
+  color: var(--text2);
+  font-size: 0.9rem;
   padding: 0 1rem;
 }
-
+/*New Transaction*/
 .new-trans-btn {
+  background: transparent;
   padding: 10px 16px;
   border: none;
   border-radius: 10px;
-  color: white;
+  color: var(--text1);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  height: 40px;
+  transition: background 0.6s ease;
+  max-width: 500px;
+  margin: 30px auto;
 }
 
 .new-trans-btn:hover {
-  background: #43a047;
+  border: 1px solid var(--text2);
 }
 .del-trans-btn {
   padding: 10px 16px;
-  border: none;
+  border: 1px solid var(--dark-bg2);
   border-radius: 10px;
-  background: var(--text-accent4);
-  color: white;
+  background: transparent;
+  color: var(--text1);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
-  margin-top: 10px;
+  transition: background 0.6s ease;
+  display: block;
+  margin: 10px auto;
+  height: 40px;
+  max-width: 500px;
 }
 
 .del-trans-btn:hover {
-  opacity: 0.9;
+  border-color: var(--text-accent4);
+  color: var(--text-accent4);
 }
 /* Form Styling */
 .add-transactions {
@@ -118,10 +123,13 @@
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
 }
 
+/* Save Transaction button*/
 .add-transactions button {
+  max-width: 500px;
+  margin: 0 auto;
   flex: 1 1 100%;
   padding: 0.75rem;
-  background: var(--text-accent1);
+  background: var(--text2);
   color: white;
   border: none;
   border-radius: 6px;
@@ -132,13 +140,24 @@
 }
 
 .add-transactions button:hover {
-  background: #4338ca;
+  background: var(--text3);
+}
+.new-del-btn-container {
+  margin-top: 100px;
 }
 
-.new-trans-btn {
-    background: var(--text-accent3)
-}
 
-.new-trans-btn:hover {
-    background: #5ab65d;
+@media (min-width:600px) {
+  .transactions-table table {
+    table-layout: fixed;
+  }  
+}
+@media (min-width:768px) {
+  .new-del-btn-container {
+    display: flex;
+    gap: 20px
+  }
+  .del-trans-btn {
+    margin-top: 0px;
+  }
 }

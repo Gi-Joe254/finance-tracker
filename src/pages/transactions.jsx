@@ -4,8 +4,8 @@ import { nanoid } from "nanoid"
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
 import { db } from "../firebase"
 import { useNavigate } from "react-router-dom"
-import Nav from "../dash-components/nav-mobile"
 import NavMobile from "../dash-components/nav-mobile"
+import TransTable from "../page-components/transTable"
 
 export default function Transactions() {
 
@@ -79,22 +79,11 @@ export default function Transactions() {
     },[])
 
     return(
-        <><div className="transactions-page">
+       <> <div className="transactions-page">
             <h1 className="transactions-header">Transactions</h1>
-            <div className="transactions-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    
-                    
-                    <tbody>
-                        {transactionTile.map((item) => (
+            <TransTable 
+                transactionTile = {
+                    transactionTile.map((item) => (
                             <tr key={item.id}>
                                 <td>{item.cat}</td>
                                 <td>{item.des}</td>
@@ -105,15 +94,11 @@ export default function Transactions() {
                                     : ""}
                                 </td>
                             </tr>
-                         ))}
-                    </tbody>                       
-
-                </table>
-                {transactionTile.length < 1 && <p
-                    style={{color:'var(--text1)'}}
-                >No transactions here</p>}
+                         ))
+                }
+            />
+            {transactionTile.length === 0 && <p>No transactions here</p>}
                 
-            </div>
             <button 
                 className="new-trans-btn"
                 onClick={showAddTransactions}
@@ -123,11 +108,11 @@ export default function Transactions() {
                 >
                     New Transaction
             </button>
-            {transactionTile.length >= 1 && <button 
+            <button 
                 onClick={handleDelete}
                 className="del-trans-btn"
             >Delete All
-            </button>}
+            </button>
             <div 
                 className="add-transactions" 
                 style={{display:addTransShown ? 'block':'none'}}
@@ -175,15 +160,15 @@ export default function Transactions() {
                     <button>Save Transaction</button>
                 </form>
             </div>
-            
+            <footer className="footer-nav">
+                <NavMobile 
+                    goToHome={()=>{navigate("/dashboard")}}
+                    goToTransactions={()=>{navigate("/transactions")}}
+                    goToStats={()=>{navigate('/stats')}}
+                    goToBudget={()=>{navigate('/budget')}}
+                />
+            </footer>
         </div>
-        <footer className="footer-nav">
-            <NavMobile 
-                goToHome={()=>{navigate("/dashboard")}}
-                goToTransactions={()=>{navigate("/transactions")}}
-                goToStats={()=>{navigate('/stats')}}
-                goToBudget={()=>{navigate('/budget')}}
-            />
-        </footer></>
+        </>
     )
 }
