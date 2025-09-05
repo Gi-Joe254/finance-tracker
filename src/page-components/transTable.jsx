@@ -1,4 +1,5 @@
-export default function TransTable({transactionTile}) {
+export default function TransTable({transactionTile, totalExpenses}) {
+    
     return(
         <div className="transactions-table">
             <table>
@@ -16,6 +17,14 @@ export default function TransTable({transactionTile}) {
                     {transactionTile}
                 </tbody>                       
 
+                <tfoot style={{background: 'var(--bg3)'}}>
+                    <tr>
+                        <td><strong>Totals</strong></td>
+                        <td></td>
+                        <td>{totalExpenses}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
                 </table>
             
         </div>

@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react"
 import "./stats.css"
 import { collection, addDoc, deleteDoc, getDocs, doc, onSnapshot } from "firebase/firestore"
-import { db } from "../firebase"
+import { auth, db } from "../firebase"
 import CategoryChart from "../statsCharts/categoryChart"
 import DateChart from "../statsCharts/dateChart"
 import CatBarChart from "../statsCharts/catBarChart"
 import Nav from "../dash-components/nav-mobile"
 import { useNavigate } from "react-router-dom"
 import NavMobile from "../dash-components/nav-mobile"
+import { useAuthState } from "react-firebase-hooks/auth"
 
 export default function Stats() {
-    const [income, setIncome] = useState(100000)
+    const [initialBal, setInitialBal] = useState(0)
     const [balance, setBalance] = useState(0)
     const [expenses, setExpenses] = useState(0)
     const [list, setList] = useState([])
-
+    const [ user, loading] = useAuthState(auth)
     const navigate = useNavigate()
 
     const categoryData = []
@@ -44,7 +45,8 @@ export default function Stats() {
     
 
     useEffect(()=> {
-        const unsub = onSnapshot(collection(db, 'transactions'), (snapshot) => {
+        const userColl = collection(db, 'users', user.uid, 'transactions')
+        const unsub = onSnapshot(userColl, (snapshot) => {
             const transList = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
@@ -55,18 +57,31 @@ export default function Stats() {
                 totalExpense += Number(item.amt)
             })
             setExpenses(totalExpense)
-            setBalance(income - totalExpense)
+            setBalance(initialBal - totalExpense)
         })
         return () => unsub()
-    },[])
-   
+    },[initialBal])
+    useEffect(()=>{
+        const unsub = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
+            if (snapshot.exists()) {
+                setInitialBal(snapshot.data().balance || 0)
+            }
+            else {
+                setInitialBal(0)
+            }
+        return () => unsub ()
+    })
+        
+    },[user])
+
+
     return(
         <>
         <div className="stats">
             <h1 className="stats-header">Stats</h1>
 
             <div className="totals">
-                <p>Total Income: {income}</p>
+                <p>Initial Balance: {initialBal}</p>
                 <p>Total Expenses: {expenses}</p>
                 <p>Net Balance: {balance}</p>
             </div>

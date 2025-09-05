@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./dashboard.css"
 import BalanceCard from "../dash-components/balanceCard";
@@ -12,7 +12,8 @@ import { GrUserSettings } from "react-icons/gr";
 import NavDesktop from "../dash-components/nav-desktop";
 import NavMobile from "../dash-components/nav-mobile";
 import { Banknote } from "lucide-react/dist/cjs/lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
 
 
 export default function Dashboard() {
@@ -22,8 +23,40 @@ export default function Dashboard() {
     const [balSetnShown, setBalSetnShown] = useState(false)
     const [userBal, setUserBal] = useState(0)
     const [totalBal, setTotalBal] = useState(0)
+    const [netBal, setNetBal] = useState(0)
 
-    
+    async function saveBal() {
+        
+        setBalSetnShown(false);
+        await setDoc(doc(db, 'users', user.uid), {
+            balance: Number(userBal)
+        }, {merge: true})
+    }
+
+    useEffect(()=>{
+        const unsub = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
+            if (snapshot.exists()) {                
+                setTotalBal(snapshot.data().balance || 0)
+            }
+        })
+        return () => unsub ()
+    },[user])
+
+    useEffect(()=> {
+        if (!user) return
+        const userColl = collection(db, 'users', user.uid, 'transactions')
+        const unsub = onSnapshot((userColl), (snapshot) => {
+            const transList = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            })
+        )
+        const totalExpenses = transList.reduce((sum, item) => sum + Number(item.amt) ||0, 0)
+        setNetBal(totalBal -totalExpenses)
+       
+        })
+        return ()=> unsub()
+    },[user, totalBal])
 
     function goToBudget() {navigate("/budget")}
     function goToTransactions() {navigate("/transactions")}
@@ -59,7 +92,7 @@ export default function Dashboard() {
                 <div className="bal-card">
                     <BalanceCard>
                         <div className="bal-card-header">Total Balance:</div>
-                        <div className="bal-card-amt">Ksh{totalBal}</div>
+                        <div className="bal-card-amt">Ksh {netBal}</div>
 
                         {balSetnShown && 
                             <div className="set-bal">
@@ -70,7 +103,7 @@ export default function Dashboard() {
                                     onChange={(e) => {setUserBal(e.target.value)}}
                                 />
                                 <button
-                                    onClick={()=> {setTotalBal(userBal); setBalSetnShown(false)}}
+                                    onClick={saveBal}
                                 >
                                     Save
                                 </button>

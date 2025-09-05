@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from "react"
 import "./transactions.css"
 import { nanoid } from "nanoid"
 import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, Timestamp } from "firebase/firestore"
-import { db } from "../firebase"
+import { auth, db } from "../firebase"
 import { useNavigate } from "react-router-dom"
 import NavMobile from "../dash-components/nav-mobile"
 import TransTable from "../page-components/transTable"
+import { User } from "lucide-react/dist/cjs/lucide-react"
+import { useAuthState } from "react-firebase-hooks/auth"
 
 export default function Transactions() {
 
@@ -13,6 +15,9 @@ export default function Transactions() {
     const [description, setDescription] = useState('')
     const [transAmount, setTransAmount] = useState('')
     const [date, setDate] = useState('')
+    const [total, setTotal] = useState(0)
+    const [user] = useAuthState(auth)
+
 
     const navigate = useNavigate()
 
@@ -22,7 +27,9 @@ export default function Transactions() {
     const categoryRef = useRef(null)
 
     const [addTransShown, setAddTransShown] = useState(false)
-
+    
+    const userColl = collection(db, 'users', user.uid, 'transactions')
+                
     function showAddTransactions(e) {
         setAddTransShown(prev => !prev);
         e.target.style.display = 'none' 
@@ -32,10 +39,11 @@ export default function Transactions() {
         e.preventDefault()
         if (  category !== '' && description !== '' && transAmount !== '' && date != '' ){
             try{
-                await addDoc(collection(db, 'transactions'),{
+                await addDoc(userColl,{
+                    userId: user.uid,
                     cat: category,
                     des: description,
-                    amt: transAmount,
+                    amt: Number(transAmount),
                     dat: Timestamp.fromDate(new Date(date))
                 })
                 console.log('saved')
@@ -44,7 +52,7 @@ export default function Transactions() {
                 setTransAmount('')
                 setDate('') 
             } catch (err) {
-                console.log('error, not saved');
+                console.log(err);
                 
             }
         }
@@ -55,27 +63,31 @@ export default function Transactions() {
 
     async function handleDelete() {
         try{
-            const documents = await getDocs(collection(db, 'transactions'))
+            const documents = await getDocs(userColl)
             const delPromise = documents.docs.map(item => (
-                deleteDoc(doc(db, 'transactions', item.id))
+                deleteDoc(doc(db, 'users', user.uid, 'transactions', item.id))
                 
             ))
             await Promise.all(delPromise)
             console.log('deleted')
         } catch (err) {
-            console.log('error. Not deleted')
+            console.log(err)
         }
     }
 
     useEffect(()=> {
-        const unsub = onSnapshot(collection(db, 'transactions'), (snapshot) => {
+        const unsub = onSnapshot(userColl, (snapshot) => {
             const transList = snapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
             }))
             setTransactionTile(transList)
+            
+            setTotal(transList.reduce((sum, item) => sum + Number(item.amt), 0))
         })
+
         return () => unsub()
+        
     },[])
 
     return(
@@ -96,6 +108,7 @@ export default function Transactions() {
                             </tr>
                          ))
                 }
+                totalExpenses={total}
             />
             {transactionTile.length === 0 && <p>No transactions here</p>}
                 
@@ -160,15 +173,16 @@ export default function Transactions() {
                     <button>Save Transaction</button>
                 </form>
             </div>
-            <footer className="footer-nav">
-                <NavMobile 
-                    goToHome={()=>{navigate("/dashboard")}}
-                    goToTransactions={()=>{navigate("/transactions")}}
-                    goToStats={()=>{navigate('/stats')}}
-                    goToBudget={()=>{navigate('/budget')}}
-                />
-            </footer>
+            
         </div>
+        <footer className="footer-nav">
+            <NavMobile 
+                goToHome={()=>{navigate("/dashboard")}}
+                goToTransactions={()=>{navigate("/transactions")}}
+                goToStats={()=>{navigate('/stats')}}
+                goToBudget={()=>{navigate('/budget')}}
+            />
+        </footer>
         </>
     )
 }

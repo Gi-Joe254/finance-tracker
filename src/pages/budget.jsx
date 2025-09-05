@@ -24,10 +24,13 @@ export default function Budget() {
 
     const navigate = useNavigate()
 
+    const savedBudgetRef = useRef(null)
+
     const [savedBudgetShown, setSavedBudgetShown] = useState(false)
     
-    function show () {
+    function showHidePrev () {
         setSavedBudgetShown(prev => !prev)
+        savedBudgetShown && savedBudgetRef.current.scrollIntoView()
     }
 
     useEffect(()=>{
@@ -201,9 +204,10 @@ export default function Budget() {
             </div>
         
             }
-        <button className="show-hide-budget-btn" onClick={show}>{savedBudgetShown ? 'Hide': 'Show'} Previous Budgets</button>
+        <button className="show-hide-budget-btn" onClick={showHidePrev}>{savedBudgetShown ? 'Hide': 'Show'} Previous Budgets</button>
         </div>
         <div 
+            ref={savedBudgetRef}
             className="saved-budget"
             style={{
                 display: savedBudgetShown ? 'block' : 'none'
@@ -221,7 +225,7 @@ export default function Budget() {
                             </ul>
                         ))
                         )}
-                        <button onClick={() => delBudget(item.id)}>Delete Budget</button>
+                        <button onClick={() => delBudget(item.id)}>Delete</button>
                     </div>  
                 </div>
             )): <p>Nothing to show</p>}
