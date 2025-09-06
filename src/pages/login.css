@@ -39,7 +39,7 @@
   transition: border 0.2s;
   outline: none;
   color: #444;
-  background: white;
+  background: var(--bg1);
 }
 
 .login-card input:focus {

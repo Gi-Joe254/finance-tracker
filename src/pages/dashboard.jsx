@@ -30,12 +30,18 @@ export default function Dashboard() {
         setMenu(prev => !prev)
     }
 
+    function cancelBal() {
+        setUserBal(0)
+    }
     async function saveBal() {
         
+        setMenu(false);
         setBalSetnShown(false);
         await setDoc(doc(db, 'users', user.uid), {
             balance: Number(userBal)
         }, {merge: true})
+
+        
     }
 
     useEffect(()=>{
@@ -85,12 +91,14 @@ export default function Dashboard() {
             </header>
             <h1 className="dash-header">Dashboard</h1>
             <div className="menu-icon">
-                {!menu ? <MenuIcon 
-                    onClick={showMenu}
-                />:
-                <XIcon 
-                    onClick={showMenu}
-                />}
+                {!menu ? 
+                    <MenuIcon 
+                        onClick={showMenu}
+                    />:
+                    <XIcon 
+                        onClick={showMenu}
+                    />
+                }
                 {menu &&
                 <ul className="user-settings-dropdown">
                     <li onClick={()=>{setBalSetnShown(prev => (!prev))}}>
@@ -120,6 +128,11 @@ export default function Dashboard() {
                                     onClick={saveBal}
                                 >
                                     Save
+                                </button>
+                                <button
+                                    onClick={cancelBal}
+                                >
+                                    Clear
                                 </button>
                             </div>
                         }
