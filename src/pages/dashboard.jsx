@@ -120,6 +120,7 @@ export default function Dashboard() {
                             <div className="set-bal">
                                 <h3>Set Initial Balance</h3>
                                 <input
+                                    type="number"
                                     placeholder="Amount" 
                                     value={userBal}
                                     onChange={(e) => {setUserBal(e.target.value)}}

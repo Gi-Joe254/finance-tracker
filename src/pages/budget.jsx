@@ -5,9 +5,12 @@ import Nav from "../dash-components/nav-mobile"
 import { useNavigate } from "react-router-dom"
 import NavMobile from "../dash-components/nav-mobile"
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot } from "firebase/firestore"
-import { db } from "../firebase"
+import { auth, db } from "../firebase"
+import { useAuthState } from "react-firebase-hooks/auth"
 
 export default function Budget() {
+
+    const [ user, loading, error ] = useAuthState(auth)
     const [budgetAmount, setBudgetAmount] = useState('')
     const [expenseName, setExpenseName] = useState('')
     const [expenseAmount, setExpenseAmount] = useState('')
@@ -27,6 +30,7 @@ export default function Budget() {
     const savedBudgetRef = useRef(null)
 
     const [savedBudgetShown, setSavedBudgetShown] = useState(false)
+
     
     function showHidePrev () {
         setSavedBudgetShown(prev => !prev)
@@ -34,6 +38,7 @@ export default function Budget() {
     }
 
     useEffect(()=>{
+
         budgetInputRef.current.focus()
     },[])
 
@@ -76,8 +81,10 @@ export default function Budget() {
     },[spent])
 
     async function saveBudget() {
+        const coll = collection(db, 'users' ,user.uid, 'budget')
+    
         try{
-            await addDoc(collection(db,'budget'),{
+            await addDoc(coll,{
                 budget: Number(budgetAmount),
                 spent: Number(spent),
                 expenses: expenses
@@ -90,11 +97,13 @@ export default function Budget() {
             console.log('budget saved')
         }catch(err) {
             alert('error, budget not saved')
+            console.log(err)
         }
     }
 
     useEffect(()=> {
-        const unsub = onSnapshot(collection(db, 'budget'), (snapshot) =>{
+        const coll = collection(db, 'users' ,user.uid, 'budget')
+        const unsub = onSnapshot(coll, (snapshot) =>{
             const budgetList = snapshot.docs.map(item => ({
                 id: item.id,
                 ...item.data()
@@ -106,7 +115,7 @@ export default function Budget() {
     
     async function delBudget(id) {
         try{
-            const budgetTile = doc(db, 'budget',id)
+            const budgetTile = doc(db, 'users',user.uid,'budget',id)
             await deleteDoc(budgetTile)
         }catch(err) {
             alert('error, not deleted')
@@ -130,9 +139,9 @@ export default function Budget() {
             </div>
 
             <div className="budget-info">
-                <p><strong>Budget:</strong> ${budgetAmount} </p>
-                <p><strong>Spent:</strong> ${spent} </p>
-                <p><strong>Remaining:</strong> ${remaining} </p>
+                <p><strong>Budget:</strong> Ksh{budgetAmount} </p>
+                <p><strong>Spent:</strong> Ksh{spent} </p>
+                <p><strong>Remaining:</strong> Ksh{remaining} </p>
                 <p><strong>Status: </strong> 
                     {budgetAmount === '' ?
                     '':
