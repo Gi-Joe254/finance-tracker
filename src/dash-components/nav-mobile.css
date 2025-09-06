@@ -30,6 +30,10 @@
     color: var(--text1);
     width: 20px;
 }
+.nav-link.active svg{
+    color: var(--text-accent4);    
+}
+
 
 @media(min-width:768px) {
     .nav-bar-mobile svg {

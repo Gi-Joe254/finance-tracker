@@ -1,18 +1,46 @@
+import { NavLink } from "react-router-dom"
 import "./nav-mobile.css"
-import { ArrowLeftRight, ChartBar, Home, Settings, Wallet } from "lucide-react"
+import { ArrowLeftRight, ChartBar, Home, Wallet } from "lucide-react"
 
-export default function NavMobile({children,goToBudget,goToHome,goToStats,goToTransactions}) {
-    
-    return(
-        <>
-        <div className="nav-bar-mobile">
-            <ul>
-                <li onClick={goToHome}><Home /></li>
-                <li onClick={goToTransactions}><ArrowLeftRight/></li>
-                <li onClick={goToStats}><ChartBar/></li>
-                <li onClick={goToBudget}><Wallet /></li>
-            </ul>
-        </div>
-        </>
-    )
+export default function NavMobile() {
+  return (
+    <div className="nav-bar-mobile">
+      <ul>
+        <li>
+          <NavLink 
+            to="/dashboard"
+            end
+            className={({ isActive })=> isActive ? "nav-link active": 'nav-link'}
+          >
+            <Home />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="/transactions"
+             className={({ isActive })=> isActive ? "nav-link active": 'nav-link'}
+        >
+            <ArrowLeftRight />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+          to="/stats"
+           className={({ isActive })=> isActive ? "nav-link active": 'nav-link'}
+          
+          >
+            <ChartBar />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+           className={({ isActive })=> isActive ? "nav-link active": 'nav-link'}
+            to="/budget"
+          >
+            <Wallet />
+          </NavLink>
+        </li>
+      </ul>
+    </div>
+  )
 }

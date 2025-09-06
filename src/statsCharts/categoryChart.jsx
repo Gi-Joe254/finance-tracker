@@ -5,15 +5,14 @@ export default function CategoryChart ({ data }) {
   const COLORS = ["var(--btn-color3)", "var(--text1)", "var(--btn-color4)", "var(--text-accent1)", "var(--text-accent4)", "var(--btn-color1)"]
   return (
     <PieChart
-        width={500}
+        width={300}
         height={300}
     >
         <Legend 
             layout="horizontal"
             verticalAlign="right"
             wrapperStyle={{
-                margin:'30px 0 0 80px',
-                color: 'black'
+                margin:'30px 0 0 80px'
             }}
         />
         <Pie

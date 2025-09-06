@@ -1,11 +1,18 @@
 
 .dashboard {
   position: relative;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   background: var(--bg1);
   color: var(--text-accent3);
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.dash-header-container {
+  background: var(--bg1);
+  padding: 0 0 10px 0;
+  box-shadow: 0px 0px 1px var(--text1);
 }
 /*wide view sidebar*/
 .dashboard header {
@@ -15,51 +22,51 @@
   display: none;
 }
 .dash-header {
-  color: var(--text2);
   font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 600;
-  text-shadow: 0px 8px 10px var(--text3);
   padding-left: 4%;
+  padding-top: 20px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text2);
+
 }
-.user-settings-icon {
+.menu-icon {
   
   width: 40px;
   position: absolute;
   top: 0;
   left: 90%;
   color: var(--text1);
-  margin-top: 20px;
+  margin-top: 30px;
 }
-.user-settings-icon svg {
+.menu-icon svg {
   cursor: pointer;
   color: var(--text1);
   width: 30px;
-  height: 20px;
+  height: 30px;
  
 }
 .user-settings-dropdown {
   background: var(--bg2);
-  width: 90px;
+  width: 300px;
+  height: 20vh;
   list-style: none;
-  padding: 5px;
-  font-size: 0.6rem;
-  display: none;
+  padding: 20px;
+  font-size: 0.8rem;
+  line-height: 2rem;
   position: absolute;
   top: 100%;
-  right: 0%
-}
-.user-settings-icon:hover {
-  background: var(--bg2);
-  transition: 0.6s;
-}
-.user-settings-icon:hover ul {
+  right: 0%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
 }
-.user-settings-icon ul li:hover {
+.menu-icon:hover {
+  background: var(--bg2);
+  transition: 0.6s;
+}
+
+.menu-icon ul li:hover {
   text-decoration: underline;
   cursor: pointer;
   
@@ -96,11 +103,14 @@
 }
 
 .greetings { 
-  color: var(--text2);
-  text-align: center;
-  font-size: 0.8rem;
-  text-shadow: 0px 8px 10px var(--text3);
+  color: var(--text-accent4);
+  padding-left: 30px;
+  text-align: left;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--text1);
 }
+
 
 .bal-card {
   color: var(--bg1);
@@ -122,7 +132,6 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 5px;
-  margin-bottom: 20px;
   width: 95%;
   margin: 0 auto;
 }
@@ -145,6 +154,12 @@
 .nav-logo-img svg {
   height: 50px;
 }
+.dash-footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
 
 
 @media(min-width:769px) {
@@ -154,8 +169,8 @@
   .dashboard header {
     display: block;
   }
-  .dash-header {
-    padding-left: 20px;
+  .dash-header-container {
+    box-shadow: 0px 0px 0px var(--bg1);
   }
   .greetings {
     padding-left: 40px;
@@ -165,10 +180,13 @@
   }
   .clickable-cards {
     gap: 15px;
-}
+  }
   .clickable-cards > :nth-child(3) {
     height: 200px;
-}
+  }
+.menu-icon {
+  left: 92%;
+  }
 
 }
 

@@ -12,7 +12,7 @@
   border-radius: 16px;
   box-shadow: 0px 0px 10px var(--bg3);
   text-align: center;
-  width: 60%;
+  width: 70%;
   margin-top: 15vh;
   display: flex;
   flex-direction: column;
@@ -25,12 +25,12 @@
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   color: var(--text3);
-  text-shadow: 2px 8px 10px var(--text-accent4);
 }
 
 /* Inputs */
 .login-card input {
   width: 90%;
+  max-width: 400px;
   padding: 2rem 0.5rem 0.8rem;
   border: none;
   border-bottom: 1px solid var(--text1);
@@ -49,6 +49,7 @@
 /* Button */
 .login-card button {
   width: 80%;
+  max-width: 400px;
   padding: 0.8rem;
   margin-top: 1.5rem;
   background: var(--text2);
@@ -68,7 +69,7 @@
 }
 
 .login-card button:first-child:hover {
-  box-shadow: 2px 8px 10px var(--text-accent4);
+  box-shadow: 0px 0px 10px var(--text-accent4);
   
 }
 .login-card button:last-child:hover {

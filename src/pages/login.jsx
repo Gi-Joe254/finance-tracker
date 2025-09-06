@@ -6,7 +6,7 @@ import { auth } from "../firebase";
 
 
 export default function Login() {
-const [userEmail, setUserEmail] = useState('j38555521@gmail.com')
+const [userEmail, setUserEmail] = useState('johndoe@gmail.com')
 const [userPassword, setUserPassword] = useState('12345678')
 
     const navigate = useNavigate();
@@ -19,10 +19,10 @@ const [userPassword, setUserPassword] = useState('12345678')
                 navigate("/dashboard")}
             else{
                 await createUserWithEmailAndPassword(auth, userEmail, userPassword);
-                alert('account created. Now login')}
+                alert('Account created. Click login')}
         }
         catch(err) {
-            alert('failed')
+            alert('Failed')
         }
     }
   

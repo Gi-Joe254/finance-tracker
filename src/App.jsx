@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css';
 import Login from './pages/login'
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom'
+import { HashRouter as Router, Route, Routes, useNavigate } from 'react-router-dom'
 import Dashboard from './pages/dashboard'
 import Transactions from './pages/transactions'
 import Budget from './pages/budget'

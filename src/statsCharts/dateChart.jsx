@@ -3,7 +3,7 @@ import { XAxis, YAxis, Tooltip, AreaChart, Area, LineChart, Line } from "rechart
 export default function DateChart({ data }) {
  
   return (
-    <LineChart width={400} height={300} data={data}>
+    <LineChart width={300} height={300} data={data}>
       <Line type='monotone' dataKey='amt' stroke='var(--text4)' />
       <XAxis dataKey='dat' />
       <YAxis />

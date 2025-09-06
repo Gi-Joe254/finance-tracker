@@ -30,7 +30,7 @@ export default function Budget() {
     
     function showHidePrev () {
         setSavedBudgetShown(prev => !prev)
-        savedBudgetShown && savedBudgetRef.current.scrollIntoView()
+        savedBudgetRef.current.scrollIntoView()
     }
 
     useEffect(()=>{
@@ -204,8 +204,9 @@ export default function Budget() {
             </div>
         
             }
-        <button className="show-hide-budget-btn" onClick={showHidePrev}>{savedBudgetShown ? 'Hide': 'Show'} Previous Budgets</button>
         </div>
+        <button className="show-hide-budget-btn" onClick={showHidePrev}>{savedBudgetShown ? 'Hide': 'Show'} Previous Budgets</button>
+        
         <div 
             ref={savedBudgetRef}
             className="saved-budget"
